@@ -1,27 +1,39 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Menu from './Menu';
-import Volver from './Volver';
-import Transacciones from './Transacciones';
-import EstadosFinancieros from './EstadosFinancieros';
-import CompararEstados from './CompararEstados';
-import Graficos from './Graficos';
-import Filtrar from './Filtrar';
-import EstadosDeResultados from './EstadosDeResultados';
-import BalancesYEstado from './BalancesYEstado';
-import PlanDeCuentas from './PlanDeCuentas';
-import AsientoPersonalizado from './AsientoPersonalizado';
-import Analisis from './Analisis';
-import Presupuesto from './Presupuesto';
-import CerrarSesion from './CerrarSesion';
+
+import { GlobalProvider } from './context/GlobalContext';
+
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Menu from './components/Menu';
+import Volver from './components/Volver';
+import Transacciones from './components/Transacciones';
+import EstadosFinancieros from './components/EstadosFinancieros';
+import CompararEstados from './components/CompararEstados';
+import Graficos from './components/Graficos';
+import Filtrar from './components/Filtrar';
+import EstadosDeResultados from './components/EstadosDeResultados';
+import BalancesYEstado from './components/BalancesYEstado';
+import PlanDeCuentas from './components/PlanDeCuentas';
+import AsientoPersonalizado from './components/AsientoPersonalizado';
+import Analisis from './components/Analisis';
+import Presupuesto from './components/Presupuesto';
+import CrearUsuarioForm from './components/CrearUsuarioForm';
+import Login from './components/Login';
+import Ajustes from './components/Ajustes';
+import CerrarSesion from './components/CerrarSesion';
 
 const App = () => {
   return (
       <Router>
-          <div>
+        <GlobalProvider>
+            <Header/>
+          <main>
               <Menu />
               <Routes>
                   <Route path="/" element={<Volver />} />
                   <Route path="/transacciones" element={<Transacciones />} />
+                  <Route path="/crearusuario" element={<CrearUsuarioForm />} />
+                  <Route path="/login" element={<Login />} />
                   <Route path="/estados-financieros" element={<EstadosFinancieros />} />
                   <Route path="/comparar-estados" element={<CompararEstados />} />
                   <Route path="/graficos" element={<Graficos />} />
@@ -32,9 +44,11 @@ const App = () => {
                   <Route path="/asiento-personalizado" element={<AsientoPersonalizado />} />
                   <Route path="/analisis" element={<Analisis />} />
                   <Route path="/presupuesto" element={<Presupuesto />} />
+                  <Route path="/ajustes" element={<Ajustes />} />
                   <Route path="/cerrar-sesion" element={<CerrarSesion />} />
               </Routes>
-          </div>
+          </main>
+        </GlobalProvider>
       </Router>
   );
 };

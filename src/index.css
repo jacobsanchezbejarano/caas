@@ -1,13 +1,504 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    /* Paleta original */
+    --primary-color: #2C3E50;
+    --secondary-color: #838889;
+    --accent1-color: #2ECC71;
+    --accent2-color: #e05050 ;
+    --background-light: #D9D9D9;
+    --background-white: #FFFFFF;
+
+    /* Colores adicionales */
+    --text-color: #333333;
+    --text-light: #7F8C8D;
+    --border-color: #D9D9D9;
+    
+    /* Tipografía */
+    --font-family: 'inter', sans-serif;
+    --font-size-base: 16px;
+    --font-size-large: 18px;
+    --font-size-small: 14px;
+    
+    /* Espaciado */
+    --padding-base: 10px;
+    --padding-large: 20px;
+    --padding-small: 5px;
+    
+    /* Sombra */
+    --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+    /* Transiciones */
+    --transition-speed: 0.3s;
+    --transition-ease: ease-in-out;
+    }
+
+    
+/*estilos principales*/
+* {
+  font-Family: 'inter'
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+h1, h2, h3 {
+    color: var(--primary-color);
+    font-family: inter;
+}
+
+.temporal {
+    margin:5rem;
+    display: flex;
+    padding: 3rem;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    background-color: var(--accent1-color);
+    color: var(--background-white); /* Color del texto blanco */
+    font-weight: 700;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: box-shadow var(--transition-speed) var(--transition-ease), transform var(--transition-speed) var(--transition-ease);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 5px 10px 10px rgba(0, 0, 0, 0.2); /* Sombra inicial */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    text-align: center; /* Centra el texto */
+}
+
+button:hover {
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra más fuerte al pasar el cursor */
+    transform: translateY(-2px); /* Leve efecto de "levantamiento" */
+}
+
+button:active {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.15); /* Sombra más intensa al hacer clic */
+    transform: translateY(0); /* Devuelve el botón a su posición original */
+}
+
+button:focus {
+    outline: none; /* Remueve el borde de enfoque por defecto */
+    box-shadow: 0 0 0 3px rgba(127, 140, 141, 0.4); /* Añade un efecto de enfoque */
+}
+
+
+/* estilos por default (mobil)*/
+body {
+    margin: 0;
+}
+
+body main {
+    margin: 0;
+}
+/*arriba*/
+header {
+    background-color: var(--primary-color);
+    display: flex;
+    margin: 0;
+    padding: 1rem;
+    width: 100vw;
+    box-sizing: border-box;
+}
+
+header h1 {
+    color: var(--background-white);
+    text-align: center;
+    margin: auto;
+}
+header #menu-button {
+    width: auto;
+    height: auto;
+    background-color: var(--primary-color);
+    box-shadow: none;
+}
+
+/*principal*/
+
+#menu-nav ul  {
+    position: absolute;
+    background-color: var(--primary-color);
+    margin-left: 0;
+    margin-top: 0;
+    width: 50vw;
+    height: auto;
+    list-style: none;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    line-height: 4rem;
+    padding: 1rem;
+   
+}
+
+#menu-nav li a {
+    color: var(--background-white);
+    font-family: var(--font-family); 
+    margin-top: 2rem;
+    font-size: 4vw;
+    text-decoration: none;
+}
+
+#menu-nav a:hover, #menu-nav button:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+.cuentas-recientes {
+    display: flex;
+    justify-content: center;
+    height: 400px;
+    background-color: var(--background-white);
+    grid-column: 3;
+    
+}
+
+
+
+
+.registrar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 400px;
+    padding: 1rem;
+    background-color: var(--background-white);
+
+}
+
+.registrar h2 {
+    font-size: 3rem;
+}
+
+.botones-principales {
+    max-width: 70%;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+.botones-principales img {
+    display: flex;
+    width: 100%;
+    justify-items: center;
+    height: auto;
+    background-color: none;
+    border-radius: 10px;
+}
+
+ 
+.botones-principales button {
+    background-color: var(--background-white);
+    box-shadow: none;
+    color: var(--primary-color);
+}
+
+.egresos img {
+    transform: scaleY(-1);
+}
+
+
+
+.categorias {
+    display: grid;  
+    width: 80%;
+    height:40px;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.categorias button {
+    font-size: 1.5rem;
+    background-color: var(--primary-color);
+}
+
+.categorias button:hover{
+    font-size: 1.5rem;
+    background-color: var(--primary-color);
+}
+
+
+/*Pantallas*/
+/*pantalla de activos*/
+
+.activos {
+    height: 1000px;
+}
+
+.card {
+    padding: 1rem;
+    height: 30%;
+}
+
+.activos h2 {
+    text-align: center;
+    color: var(--primary-color);
+    font-weight: 1000;
+ 
+}
+
+.activos button {
+background-color: var(--primary-color);
+height: auto;
+}
+
+.categorias {
+    display: grid;  
+    grid-template-columns: 1fr 1fr;
+    margin: auto;
+}
+
+.categorias button.centrado {
+    grid-column: span 2;
+    justify-self: center;
+    width: auto;
+}
+
+/*pantalla de graficos*/
+
+main {
+    background-color: var(--background-light);
+    margin: 1rem;
+    border-radius: 10px;
+}
+
+.graficos {
+    padding: 20px;
+    text-align: center;
+}
+
+
+.graficos-cuadro {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-color: var(--background-white);
+    height: 400px;
+    margin: .5rem;
+    border-radius: 10px;
+    z-index: 1; 
+    box-sizing: border-box;
+}
+
+.graficos-cuadro h2{ background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)); /* Degradado de arriba hacia abajo con opacidad del 50% */
+    border-radius: 10px;
+    padding: 30px; 
+    width: 100%; 
+    box-sizing: border-box;
+    margin: 0; 
+}
+
+
+
+
+/*forms  estilos*/
+/*form de registrar*/
+
+.registro-cuenta{
+    background-color: var(--background-white);
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 30%;
+    align-items: center;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.5);
+    width: 350px;
+    height: auto;
+}
+
+.nombre-cuenta h2 {
+    font-size: 30px;
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: 2px;
+    }
+    
+.nombre-cuenta H3{
+    color: var(--secondary-color);
+    margin-top: 3PX;
+}
+
+.disp-saldo h2{
+    font-size: 30px;
+    color: var(--primary-color);
+    font-size: 80px;
+    font-weight: bold;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+.disp-saldo h3{
+    color: var(--secondary-color);
+    margin-left: 1rem;
+    margin-top: 0px;
+}
+
+
+.registro-cuenta input[type="text"] {
+    width: 80%; 
+    padding: 0.5rem;
+    background-color: var(--background-light);
+    border-color: var(--background-white);
+    margin-bottom: 1rem;
+    color: var(--secondary-color); 
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.registro-cuenta label {
+    width: 80%; /* Alinea las etiquetas con los inputs */
+    margin-bottom: 0.5rem;
+    text-align: left;
+    font-weight: bold;
+    color: var(--secondary-color); /* Color de las etiquetas */
+}
+
+.registro-cuenta button {
+    width: auto;
+    margin: 1rem;
+}
+
+
+button:hover {
+    background-color: var(--accent1-color);
+}
+
+#formCrearUsuario {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.form-style h2 {
+  margin-bottom: 3rem;
+}
+
+/* Estilos para tablet (768px a 1024px) */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        margin: auto;
+        max-width: 1000px;
+        height: 1200px;
+        padding: 20px;
+    }
+    header {
+        width: 100%;
+    }
+    
+}
+
+/* Estilos para desktop (1025px en adelante) */
+@media (min-width: 1025px) {
+
+
+    main {
+        height: 50vw;
+        display: grid;
+        grid-template-columns: 1fr 2.5fr 1fr;
+        background-color: var(--background-white);
+    }
+
+    #menu-nav ul {
+        position: relative;
+        width: 20vw;
+        line-height: 2.5rem;
+        height: 100%;
+        border-radius: 10px;
+        top: 1.5rem;
+        height: 84%;
+    }
+
+    
+    #menu-nav li a {
+        color: var(--background-white);
+        font-family: var(--font-family); 
+        margin-top: 2rem;
+        font-size: 1.5vw;
+        
+    }
+
+    .registrar {
+        grid-column: 2;
+        grid-row: 1;
+        width: 30%;
+    }
+
+    .registrar h2 {
+        display: none;
+    }
+
+    .registrar img {
+        display: none;
+    }   
+
+    .registrar button, .botones-principales button{
+        background-color: var(--background-white);
+        color: #7F8C8D;
+        box-shadow: none;
+        font-size: 20px;
+        
+    }
+
+    .categorias {
+        display: flex;
+        margin-top: 0;
+    }
+
+
+    .graficos {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--border-color);
+        grid-column: 2;
+        grid-row:1 2;
+        margin: 1.5rem;
+        border-radius: 10px; 
+        padding-bottom: 3rem;
+    }
+
+    .cuadros {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .graficos-cuadro {
+        max-height: 300px;
+    }
+
+    #patrimonio {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .cuentas-recientes  {
+        background-color: var(--background-light);
+        height: 100%;
+    }
+    .cuentas-recientes h2 {
+        font-size: clamp(1rem, 1.5vw, 2rem);
+    }
+
+    
+
+
+
+
+
+
 }

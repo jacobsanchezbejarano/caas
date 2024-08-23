@@ -1,0 +1,19 @@
+{
+    "es":{
+        "CORREGIR_CONTRASENA": "Por favor, corrige los errores en la contraseña.",
+        "ERROR_CREACION_USUARIO": "Error al crear usuario",
+        "NOMBRE":"Nombre",
+        "APELLIDO":"Apellido",
+        "EMAIL":"Correo",
+        "CREAR_USUARIO":"Crear Usuario"
+    },
+    "en":{
+        "CORREGIR_CONTRASENA": "Please correct the errors in the password.",
+        "ERROR_CREACION_USUARIO": "Error creating user",
+        "NOMBRE": "First Name",
+        "APELLIDO": "Last Name",
+        "EMAIL": "Email",
+        "CREAR_USUARIO": "Create User"
+    }
+    
+}
