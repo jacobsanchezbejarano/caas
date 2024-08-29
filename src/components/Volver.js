@@ -1,12 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Volver = () => {
-    return (
-        <div>
-            <h2>Volver</h2>
-            {/* Contenido del componente Volver */}
-        </div>
-    );
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    navigate(-1); // Navega hacia atrás en la historia
+  };
+
+  return (
+    <button onClick={handleBackClick} className="back-button">
+      ← Volver
+    </button>
+  );
 };
 
 export default Volver;

@@ -494,11 +494,59 @@ input {
         font-size: clamp(1rem, 1.5vw, 2rem);
     }
 
-    
-
-
-
-
-
-
 }
+
+.menu-nav {
+    display: none;
+}
+
+.menu-nav ul {
+    z-index: 1000;
+}
+
+.menu-nav.visible {
+    display: block;
+}
+
+.hamburger-icon {
+    display: none;
+}
+
+@media (max-width: 1000px) {
+    .menu-nav {
+        display: none;
+    }
+
+    .menu-nav.visible {
+        display: block;
+    }
+
+    .hamburger-icon {
+        display: block;
+        /* Estilos para el ícono de hamburguesa */
+    }
+}
+
+@media (min-width: 1000px) {
+    .menu-nav {
+        display: block;
+    }
+
+    .hamburger-icon {
+        display: none;
+    }
+}
+
+.back-button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    border-radius: 4px;
+  }
+  
+  .back-button:hover {
+    background-color: #e0e0e0;
+  }

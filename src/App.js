@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Menu from './components/Menu';
 import Volver from './components/Volver';
+import Home from './components/Home';
 import Transacciones from './components/Transacciones';
 import EstadosFinancieros from './components/EstadosFinancieros';
 import CompararEstados from './components/CompararEstados';
@@ -29,8 +30,9 @@ const App = () => {
             <Header/>
           <main>
               <Menu />
+              <Volver />
               <Routes>
-                  <Route path="/" element={<Volver />} />
+                  <Route path="/" element={<Home />} />
                   <Route path="/transacciones" element={<Transacciones />} />
                   <Route path="/crearusuario" element={<CrearUsuarioForm />} />
                   <Route path="/login" element={<Login />} />
