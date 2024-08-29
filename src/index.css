@@ -664,3 +664,12 @@ input {
   .categoria-buttons {
     display: flex;
   }
+
+  .modal {
+    display: none;
+    /* ... otros estilos para posicionar y dar estilo al modal */
+  }
+  
+  .modal.is-open {
+    display: block;
+  }

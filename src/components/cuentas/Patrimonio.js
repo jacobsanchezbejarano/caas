@@ -2,11 +2,28 @@ import React, { useState } from 'react';
 import FinancialComponent from './FinancialComponent';
 import CategoriaButton from './CategoriaButton';
 import CuentaLista from './CuentaLista';
+import TransaccionForm from './TransaccionForm';
 
 const Patrimonio = () => {
   // Estado para manejar la categoría seleccionada
   const [selectedCategoria, setSelectedCategoria] = useState('Patrimonio');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedAccountNumber, setSelectedAccountNumber] = useState('');
+  const [cuentasDisponibles, setCuentasDisponibles] = useState([{ title: 'Caja', accountNumber: '100001', balance: '10000' },
+    { title: 'Banco de Crédito', accountNumber: '100002', balance: '10000' },
+    { title: 'Test', accountNumber: '100003', balance: '10000' },]);
 
+  const handleButtonClick = (accountNumber) => {
+    setSelectedAccountNumber(accountNumber);
+    setIsModalOpen(true);
+  };
+  
+
+  const handleFormSubmit = (data) => {
+    // Aquí manejarías la lógica de envío de la transacción
+    console.log('Datos del formulario:', data);
+    setIsModalOpen(false);
+  };
   // Datos de ejemplo para cada categoría
   const categoriasCuentas = {
     Patrimonio: [
@@ -19,11 +36,6 @@ const Patrimonio = () => {
   // Función para manejar el cambio de categoría
   const handleCategoriaClick = (categoria) => {
     setSelectedCategoria(categoria);
-  };
-
-  // Función para manejar el botón de registro
-  const handleButtonClick = (accountNumber) => {
-    alert(`Registrando en cuenta: ${accountNumber}`);
   };
 
   return (
@@ -41,6 +53,13 @@ const Patrimonio = () => {
         buttonLabel="REGISTRAR"
         onButtonClick={handleButtonClick}
       />
+      {isModalOpen && (
+        <TransaccionForm
+          cuentaNumero={selectedAccountNumber}
+          onSubmit={handleFormSubmit}
+          cuentasDisponibles={cuentasDisponibles}
+        />
+      )}
     </FinancialComponent>
   );
 };

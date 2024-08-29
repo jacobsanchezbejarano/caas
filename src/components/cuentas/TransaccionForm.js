@@ -18,7 +18,7 @@ const TransaccionForm = ({ titulo, cuentaNombre, cuentaNumero, saldoDisponible, 
       <label htmlFor="cobrar-con">Cobrar con:</label>
       <select id="cobrar-con" name="cobrar-con" required>
         {cuentasDisponibles.map((cuenta) => (
-          <option key={cuenta.id} value={cuenta.id}>{cuenta.nombre}</option>
+          <option key={cuenta.accountNumber} value={cuenta.accountNumber}>{cuenta.title}</option>
         ))}
       </select>
 
