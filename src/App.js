@@ -7,6 +7,13 @@ import Footer from './components/Footer';
 import Menu from './components/Menu';
 import Volver from './components/Volver';
 import Home from './components/Home';
+import Ingresos from './components/cuentas/Ingresos';
+import Egresos from './components/cuentas/Egresos';
+import Activos from './components/cuentas/Activos';
+import Pasivos from './components/cuentas/Pasivos';
+import Patrimonio from './components/cuentas/Patrimonio';
+import Costos from './components/cuentas/Costos';
+
 import Transacciones from './components/Transacciones';
 import EstadosFinancieros from './components/EstadosFinancieros';
 import CompararEstados from './components/CompararEstados';
@@ -39,6 +46,15 @@ const App = () => {
               <Volver />
               <Routes>
                 <Route path="/" element={<Home />} />
+
+                <Route path="/ingresos" element={<Ingresos />} />
+                <Route path="/egresos" element={<Egresos />} />
+                <Route path="/activos" element={<Activos />} />
+                <Route path="/pasivos" element={<Pasivos />} />
+                <Route path="/patrimonio" element={<Patrimonio />} />
+                <Route path="/costos" element={<Costos />} />
+
+
                 <Route path="/transacciones" element={<Transacciones />} />
                 <Route path="/crearusuario" element={<CrearUsuarioForm />} />
                 <Route path="/login" element={<Login />} />
