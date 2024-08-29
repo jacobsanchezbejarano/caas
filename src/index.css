@@ -371,7 +371,7 @@ button:hover {
     background-color: var(--accent1-color);
 }
 
-#formCrearUsuario {
+#formCrearUsuario, #formLogin {
   display: flex;
   flex-direction: column;
 }
@@ -549,4 +549,16 @@ input {
   
   .back-button:hover {
     background-color: #e0e0e0;
+  }
+
+  .register-link {
+    text-align: center;
+  }
+  
+  .register-link a {
+    color: #007bff;
+  }
+  
+  .register-link a:hover {
+    text-decoration: underline;
   }
