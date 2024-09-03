@@ -6,13 +6,15 @@ const GlobalContext = createContext();
 // Crea un proveedor para el contexto
 const GlobalProvider = ({ children }) => {
     const [state, setState] = useState({
-        user: null,
+        user: localStorage.getItem('emailCaas') ?? null,
+        token: localStorage.getItem('authTokenCaas') ?? null,
         theme: 'light',
         language: 'en',
     });
 
     // Función para actualizar el usuario
     const updateUser = (user) => setState(prevState => ({ ...prevState, user }));
+    const updateToken = (token) => setState(prevState => ({ ...prevState, token }));
 
     // Función para actualizar el tema
     const updateTheme = (theme) => setState(prevState => ({ ...prevState, theme }));
@@ -26,7 +28,7 @@ const GlobalProvider = ({ children }) => {
     }, [state.language]);
 
     return (
-        <GlobalContext.Provider value={{ state, updateUser, updateTheme, updateLanguage }}>
+        <GlobalContext.Provider value={{ state, updateUser, updateToken, updateTheme, updateLanguage }}>
             {children}
         </GlobalContext.Provider>
     );

@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
+import { GlobalContext } from '../context/GlobalContext';
 import CuentasRecientes from './cuentas/CuentasRecientes';
 const Home = () => {
+  const { state } = useContext(GlobalContext);
+  const savedToken = localStorage.getItem('authTokenCaas');
+
   return (
-    <div>
+    state.user && <div>
       <CuentasRecientes />
 
       <section className="registrar">
@@ -24,24 +28,16 @@ const Home = () => {
         </div>
         <div className="categorias">
           <Link to="/activos">
-            <a>
                 <button>ACTIVOS</button>
-            </a>
           </Link>
           <Link to="/pasivos">
-          <a>
             <button>PASIVOS</button>
-          </a>
           </Link>
           <Link to="/patrimonio">
-          <a>
             <button>PATRIMONIO</button>
-          </a>
           </Link>
           <Link to="/costos">
-          <a>
             <button>COSTOS</button>
-          </a>
           </Link>
         </div>
       </section>

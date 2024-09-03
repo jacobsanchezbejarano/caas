@@ -8,7 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const { updateUser } = useContext(GlobalContext); // Asume que tienes una función para actualizar el estado del usuario
+  const { updateUser, updateToken, state } = useContext(GlobalContext); // Asume que tienes una función para actualizar el estado del usuario
   const navigate = useNavigate(); // Hook para redireccionar después del inicio de sesión
 
   const handleSubmit = (e) => {
@@ -28,10 +28,14 @@ const Login = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.status === 'success') {
           // Si la autenticación es exitosa, establece el usuario en el contexto
-          updateUser({ user: { username } });
+          updateUser(username);
+
+          localStorage.setItem('emailCaas', username);
+          localStorage.setItem('authTokenCaas', data.token);
+          updateToken(data.token);
 
           navigate('/'); // Redirecciona al usuario a la página principal
         } else {
