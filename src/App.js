@@ -34,7 +34,7 @@ import CerrarSesion from './components/CerrarSesion';
 const App = () => {
   const { state } = useContext(GlobalContext);
 
-  const debug = true;
+  const debug = false;
 
   return (
     <Router>

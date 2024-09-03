@@ -1,34 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'; // Hook para redireccionar
-import { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext'; // Asegúrate de importar el contexto correcto
+import {API_URL} from "../utils/constants";
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const { setState } = useContext(GlobalContext); // Asume que tienes una función para actualizar el estado del usuario
+  const { updateUser } = useContext(GlobalContext); // Asume que tienes una función para actualizar el estado del usuario
   const navigate = useNavigate(); // Hook para redireccionar después del inicio de sesión
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Realiza la solicitud POST al servidor
+    fetch(API_URL+'/php/ajax/usuarios/ajax.auth.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        option: 'login',
+        email: username,
+        password: password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === 'success') {
+          // Si la autenticación es exitosa, establece el usuario en el contexto
+          updateUser({ user: { username } });
 
-    // Aquí iría tu lógica de autenticación, por ejemplo, una llamada a una API
-    if (username === 'admin' && password === 'password') {
-      setState({ user: { username } }); // Establece el usuario en el contexto
-      navigate('/'); // Redirecciona al usuario a la página principal
-    } else {
-      setError('Nombre de usuario o contraseña incorrectos.');
-    }
+          navigate('/'); // Redirecciona al usuario a la página principal
+        } else {
+          // Si hay un error, muestra el mensaje de error
+          setError('Nombre de usuario o contraseña incorrectos.');
+        }
+      })
+      .catch((error) => {
+        console.error('Error al autenticar:', error);
+        setError('Error en la solicitud de autenticación.');
+      });
   };
+  
 
   return (
     <div className="form-style">
       <h2>Iniciar Sesión</h2>
       <form onSubmit={handleSubmit} id="formLogin" className="temporal">
         <div>
-          <label htmlFor="username">Nombre de Usuario:</label>
+          <label htmlFor="username">Email:</label>
           <input
             type="text"
             id="username"
