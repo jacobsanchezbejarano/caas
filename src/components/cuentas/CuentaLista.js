@@ -4,8 +4,13 @@ import CuentaItem from './CuentaItem';
 
 const CuentaLista = ({ title, cuentas, buttonLabel, onButtonClick }) => {
   return (
-    <div className="cuenta-list">
+    cuentas.length > 0 && <div className="cuenta-list">
       <h2 className="titulo">{title}</h2>
+      
+      <div className="buttons-container">
+        <button className="create-button">CREAR CUENTA</button>
+        <button className="view-all-button">VER TODAS</button>
+      </div>
       {cuentas.map((cuenta, index) => (
         <CuentaItem
           key={index}
@@ -16,10 +21,6 @@ const CuentaLista = ({ title, cuentas, buttonLabel, onButtonClick }) => {
           onButtonClick={() => onButtonClick(cuenta.accountNumber)}
         />
       ))}
-      <div className="buttons-container">
-        <button className="create-button">CREAR CUENTA</button>
-        <button className="view-all-button">VER TODAS</button>
-      </div>
     </div>
   );
 };
