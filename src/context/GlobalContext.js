@@ -33,6 +33,10 @@ const GlobalProvider = ({ children }) => {
     }, [state.language]);
 
     useEffect(() => {
+        getAccounts();
+    }, []);
+
+    const getAccounts = () => {
         const token = localStorage.getItem('authTokenCaas');
         fetch(API_URL+'/php/ajax/contabilidad_personal/ajax.cuentas.php', {
             method: 'POST',
@@ -50,7 +54,7 @@ const GlobalProvider = ({ children }) => {
         .catch(error => {
             console.error('Error al obtener datos:', error);
         });
-    }, []);
+    }
 
     return (
         <GlobalContext.Provider value={{ state, updateUser, updateToken, updateTheme, updateLanguage, updateAccounts }}>
