@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import FinancialComponent from './FinancialComponent';
 import CategoriaButton from './CategoriaButton';
 import CuentaLista from './CuentaLista';
 import TransaccionForm from './TransaccionForm';
+import { GlobalContext } from '../../context/GlobalContext'; // Asegúrate de importar el contexto correcto
 
 const Ingresos = () => {
   // Estado para manejar la categoría seleccionada
   const [selectedCategoria, setSelectedCategoria] = useState('Ingresos');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedAccountNumber, setSelectedAccountNumber] = useState('');
+  
+  const { state } = useContext(GlobalContext);
+
   const [cuentasDisponibles, setCuentasDisponibles] = useState([{ title: 'Caja', accountNumber: '100001', balance: '10000' },
     { title: 'Banco de Crédito', accountNumber: '100002', balance: '10000' },
     { title: 'Test', accountNumber: '100003', balance: '10000' },]);
@@ -24,18 +28,8 @@ const Ingresos = () => {
     console.log('Datos del formulario:', data);
     setIsModalOpen(false);
   };
-  // Datos de ejemplo para cada categoría
-  const categoriasCuentas = {
-    Ingresos: [
-      { title: 'Nombre de Cuenta', accountNumber: '100001', balance: '10000' },
-      { title: 'Nombre de Cuenta', accountNumber: '100002', balance: '10000' },
-      { title: 'Nombre de Cuenta', accountNumber: '100003', balance: '10000' },
-    ],
-    'Ingresos Extraordinarios': [
-      { title: 'Cuenta Extraordinaria', accountNumber: '200001', balance: '50000' },
-      { title: 'Cuenta Extraordinaria', accountNumber: '200002', balance: '25000' },
-    ],
-  };
+
+  const categoriasCuentas = state.accounts.Ingresos;
 
   // Función para manejar el cambio de categoría
   const handleCategoriaClick = (categoria) => {
@@ -58,7 +52,7 @@ const Ingresos = () => {
       </div>
       <CuentaLista
         title={selectedCategoria}
-        cuentas={categoriasCuentas[selectedCategoria]}
+        cuentas={categoriasCuentas[selectedCategoria] ?? []}
         buttonLabel="REGISTRAR"
         onButtonClick={handleButtonClick}
       />

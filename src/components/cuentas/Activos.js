@@ -1,14 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import FinancialComponent from './FinancialComponent';
 import CategoriaButton from './CategoriaButton';
 import CuentaLista from './CuentaLista';
 import TransaccionForm from './TransaccionForm';
+import { GlobalContext } from '../../context/GlobalContext'; // Asegúrate de importar el contexto correcto
 
 const Activos = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCategoria, setSelectedCategoria] = useState('Disponibles');
+  const [selectedCategoria2, setSelectedCategoria2] = useState('Exigibles>1año');
   const [selectedAccountNumber, setSelectedAccountNumber] = useState('');
+
+  const { state } = useContext(GlobalContext);
+
   const [cuentasDisponibles, setCuentasDisponibles] = useState([{ title: 'Caja', accountNumber: '100001', balance: '10000' },
     { title: 'Banco de Crédito', accountNumber: '100002', balance: '10000' },
     { title: 'Test', accountNumber: '100003', balance: '10000' },]);
@@ -29,60 +34,32 @@ const Activos = () => {
     setSelectedCategoria(categoria);
   };
 
+  const handleCategoriaClick2 = (categoria) => {
+    setSelectedCategoria2(categoria);
+  };
+
   // Datos de ejemplo para cada categoría
   const categoriasCuentas = {
-    Disponibles: [
-      { title: 'Nombre de Cuenta', accountNumber: '100001', balance: '10000' },
-      { title: 'Nombre de Cuenta', accountNumber: '100002', balance: '10000' },
-      { title: 'Nombre de Cuenta', accountNumber: '100003', balance: '10000' },
-    ],
-    'Inv Temporales': [
-      { title: 'Cuenta Extraordinaria', accountNumber: '200001', balance: '50000' },
-      { title: 'Cuenta Extraordinaria', accountNumber: '200002', balance: '25000' },
-    ],
-    'Exigibles': [
-      { title: 'Cuenta Extraordinaria', accountNumber: '200001', balance: '50000' },
-      { title: 'Cuenta Extraordinaria', accountNumber: '200002', balance: '25000' },
-    ],
-    'Realizables': [
-      { title: 'Cuenta Extraordinaria', accountNumber: '200001', balance: '50000' },
-      { title: 'Cuenta Extraordinaria', accountNumber: '200002', balance: '25000' },
-    ],
-    'Diferidos': [
-      { title: 'Cuenta Extraordinaria', accountNumber: '200001', balance: '50000' },
-      { title: 'Cuenta Extraordinaria', accountNumber: '200002', balance: '25000' },
-    ]
+    'Disponibles': state.accounts.Activos['AC Disponibles'],
+    'Inversiones Temporales': state.accounts.Activos['AC Inversiones Temporales'],
+    'Exigibles': state.accounts.Activos['AC Exigibles'],
+    'Realizables': state.accounts.Activos['AC Realizables'],
+    'Diferidos': state.accounts.Activos['AC Diferidos'],
   };
 
   const categoriasCuentas2 = {
-    "NC Exigibles": [
-      { title: 'Nombre de Cuenta', accountNumber: '100001', balance: '10000' },
-      { title: 'Nombre de Cuenta', accountNumber: '100002', balance: '10000' },
-      { title: 'Nombre de Cuenta', accountNumber: '100003', balance: '10000' },
-    ],
-    'Inv Permanentes': [
-      { title: 'Cuenta Extraordinaria', accountNumber: '200001', balance: '50000' },
-      { title: 'Cuenta Extraordinaria', accountNumber: '200002', balance: '25000' },
-    ],
-    'Bienes de Uso': [
-      { title: 'Cuenta Extraordinaria', accountNumber: '200001', balance: '50000' },
-      { title: 'Cuenta Extraordinaria', accountNumber: '200002', balance: '25000' },
-    ],
-    'Intangibles': [
-      { title: 'Cuenta Extraordinaria', accountNumber: '200001', balance: '50000' },
-      { title: 'Cuenta Extraordinaria', accountNumber: '200002', balance: '25000' },
-    ],
-    'Gastos Diferidos': [
-      { title: 'Cuenta Extraordinaria', accountNumber: '200001', balance: '50000' },
-      { title: 'Cuenta Extraordinaria', accountNumber: '200002', balance: '25000' },
-    ]
+    'Exigibles>1año': state.accounts.Activos['ANC Exigibles>1año'],
+    'Inversiones permanentes': state.accounts.Activos['ANC Inversiones permanentes'],
+    'Bienes de Uso': state.accounts.Activos['ANC Bienes de Uso'],
+    'Intangibles': state.accounts.Activos['ANC Intangibles'],
+    'Gastos Dieferidos>1Año': state.accounts.Activos['ANC Gastos Dieferidos>1Año'],
   };
 
   return (
     <>
       <FinancialComponent title="Activos Corrientes">
-        <CategoriaButton label="Disponibles" onClick={() => handleCategoriaClick('Disponibles')} />
-        <CategoriaButton label="Inv Temporales" onClick={() => handleCategoriaClick('Inv Temporales')} />
+        <CategoriaButton label="Disponibles" isActive={selectedCategoria === 'Disponibles'} onClick={() => handleCategoriaClick('Disponibles')} />
+        <CategoriaButton label="Inversiones Temporalesral" onClick={() => handleCategoriaClick('Inversiones Temporales')} />
         <CategoriaButton label="Exigibles" onClick={() => handleCategoriaClick('Exigibles')} />
         <CategoriaButton label="Realizables" onClick={() => handleCategoriaClick('Realizables')} />
         <CategoriaButton label="Diferidos" onClick={() => handleCategoriaClick('Diferidos')} />
@@ -95,14 +72,14 @@ const Activos = () => {
       </FinancialComponent>
 
       <FinancialComponent title="Activos No Corrientes">
-        <CategoriaButton label="Exigibles" onClick={() => handleCategoriaClick('NC Exigibles')} />
-        <CategoriaButton label="Inv Permanentes" onClick={() => handleCategoriaClick('Inv Permanentes')} />
-        <CategoriaButton label="Bienes de Uso" onClick={() => handleCategoriaClick('Bienes de Uso')} />
-        <CategoriaButton label="Intangibles" onClick={() => handleCategoriaClick('Intangibles')} />
-        <CategoriaButton label="Gastos Diferidos" onClick={() => handleCategoriaClick('Gastos Diferidos')} />
+        <CategoriaButton label="Exigibles>1año" onClick={() => handleCategoriaClick2('Exigibles>1año')} />
+        <CategoriaButton label="Inversiones permanentes" onClick={() => handleCategoriaClick2('Inversiones permanentes')} />
+        <CategoriaButton label="Bienes de Uso" onClick={() => handleCategoriaClick2('Bienes de Uso')} />
+        <CategoriaButton label="Intangibles" onClick={() => handleCategoriaClick2('Intangibles')} />
+        <CategoriaButton label="Gastos Dieferidos>1Año" onClick={() => handleCategoriaClick2('Gastos Dieferidos>1Año')} />
         <CuentaLista
-            title={selectedCategoria}
-            cuentas={categoriasCuentas2[selectedCategoria] ?? []}
+            title={selectedCategoria2}
+            cuentas={categoriasCuentas2[selectedCategoria2] ?? []}
             buttonLabel="REGISTRAR"
             onButtonClick={handleButtonClick}
         />
